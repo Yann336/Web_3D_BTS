@@ -1,19 +1,35 @@
 <script setup>
 import { ref } from 'vue';
-import Form from './components/Form.vue';
 
-const id = ref(1);
+const count = ref(0)
 
+const increment = () => {
+  count.value++
+}
 
-
+const decrement = () => {
+  count.value--
+}
 
 </script>
 
+
+
+
 <template>
-  <h1> Coucou {{ id }}</h1>
-  <button @click="id++"> Suivant </button>
-  <Form/>
+  <p :id="'p-${count}'"> Coucou {{ count }}</p>
+  <button @click="increment"> Incrementer </button>
+  <button @click="decrement"> Decrementer </button>
+
+  <div v-show="count >= 5"> Vous avez cliqué plus de 5 fois </div>
+
 </template>
+
+
+
+
+
+
 
 <style scoped>
 .logo {
