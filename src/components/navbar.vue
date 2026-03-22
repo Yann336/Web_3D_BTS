@@ -7,14 +7,11 @@ import '../assets/style/navbar.css';
 
 <template>
     <header class="page-navbar">
-    <div class = "navbar">
-        <nav>
-          <a href="#"> Plisk 3D </a>
-            <a href="#"> Panier </a>
-            <a href="#"> Produits </a>
-            <a href="#"> Mon compte </a>
-        </nav>
-    </div>
+    <nav class = "navbar">
+        <RouterLink to="/" class="nav"> Acceuil </RouterLink>
+        <RouterLink to="/connection" class="nav"> Se connecter </RouterLink>
+        <RouterLink to="/basket" class="nav"> Mon panier </RouterLink>
+    </nav>
  </header>
 
 </template>

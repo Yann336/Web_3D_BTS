@@ -1,5 +1,4 @@
 <script setup>
-import '../assets/style/home.css';
 </script>
 
 <template>
@@ -8,8 +7,9 @@ import '../assets/style/home.css';
             <h1>Plisk 3D</h1>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut debitis aliquid velit. Illum odio ducimus error, eveniet aspernatur fuga, nemo placeat quos asperiores nulla rerum officiis? Tenetur iusto ratione doloribus.</p>
         </div>
-
     </div>
+
+    
 </template>
 
 <style>

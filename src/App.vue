@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from 'vue';
-import navbar from './components/navbar.vue'
-import home from './components/home.vue'
+import navbar from './components/navbar.vue';
+
+
 </script>
 
 
 <template>
-<navbar/>
-<home/>
+  <navbar/>
+
+  <RouterView />
 </template>
 
