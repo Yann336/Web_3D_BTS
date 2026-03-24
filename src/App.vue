@@ -5,75 +5,36 @@ import { ref } from 'vue';
 const title =ref ("");
 const completed = ref(false);
 const date = ref();
-const mask = ref(false)
+let id = 1
+const hide = ref(false)
 
-const prints = (completed) =>{
-  if (completed == true){
-    return show = false
-  }
-}
-
-const todolist = ref([
-])
+const todolist = ref([])
 
 const addTodo = () =>{
    todolist.value.push({
+    id : id++,
     title: title.value,
     date: date.value,
     completed : completed.value
    })
   title.value = ''
   date.value = ''
+  completed.value = false
+};
+
+const deleteTodo = (id) =>{
+  todolist.value = todolist.value.filter(todo => todo.id !== id)
+};
+
+const sortedTodos = () =>{
+  let sortedTodos = todolist.value.toSorted((a,b)=> a.completed > b.completed ? 1 : -1)
+  if (hide.value){
+    sortedTodos = sortedTodos.filter(t => !t.completed );
+  }
+  return sortedTodos;
 }
 
-const deleteTodo = (index) =>{
-  todolist.value.splice(index,1)
-}
 
-
-// const count = ref(0)
-// const movieName = ref('')
-// const movies = ref([
-//   'matrix',
-//   'lilo',
-//   'titanic'
-// ])
-
-// const sortMovies = () =>{
-//   -movies.value.sort((a,b)=> a>b ? 1 : -1)
-// }
-
-
-// const deleteMovie = (movie) =>{
-//   movies.value = movies.value.filter(m => m !== movie)
-// }
-
-// const addMovie = () => {
-//   movies.value.push(movieName.value)
-//   movieName.value = ''
-
-// }
-
-// const increment = () => {
-//   count.value++
-// }
-
-// const decrement = () => {
-//   count.value--
-// }
-
-
-
-
-// const person = ref({
-//   firstname : 'Yann',
-//   lastname: 'Popov',
-//   age: 20
-// })
-
-// const randomAge = () => {
-//   person.value.age = Math.round(Math.random()* 100)
-// }
 
 
 </script>
@@ -83,63 +44,53 @@ const deleteTodo = (index) =>{
 
 <template>
 
-<input type="checkbox" @click="prints(todo.completed)">
-
 <form action="" @submit.prevent="addTodo">
   <input type="text" placeholder="Nom" v-model="title">
   <br>
   <input type="date" placeholder="date" v-model = "date">
   <br>
-  <button> Ajouter </button>
+  <button :disabled="title.length === 0"> Ajouter </button>
 </form>
 
 
 
 <ul>
-  <li v-for="(todo, index) in todolist"
-  :key="index"  v-show="!show">
-  <input type="checkbox" v-model="todo.completed">
-  {{ todo.title }} {{ todo.date }} 
+  <p v-if="todolist.length === 0"> Ajouter des taches</p>
 
-  <button @click="deleteTodo(index)"> Supprimer </button>
+    <li v-for="todo in sortedTodos()"
+    :key="todo.id" 
+    :class="{barré: todo.completed }" 
+    >
+    
+    <label>
+      <input type="checkbox" v-model="todo.completed">
+      {{ todo.title }} {{ todo.date }} 
+
+      <button @click="deleteTodo(todo.id)"> Supprimer </button>
+    </label>
   </li>
 </ul>
 
 
+<div>
+  <label>
+    <input type="checkbox" v-model="hide">
+    Masquer les taches complétées
+  </label>
+</div>
 
-  <!-- <p :id="'p-${count}'"> Coucou {{ count }}</p>
-  <button @click="increment"> Incrementer </button>
-  <button @click="decrement"> Decrementer </button>
-  <hr>
-  <button @click="sortMovies">réorganiser</button>
 
-  <form action="" @submit.prevent="addMovie">
-    <input type="text" placeholder="nv film" v-model="movieName">
-    <button> Ajouter </button>
-  </form>
 
-  <ul>
-    <li 
-    v-for="movie in movies"
-    :key="movie"
-    >
-      {{ movie }} <button @click="deleteMovie(movie)"> suppr </button>
-    </li>
-  </ul>
 
-  <div v-show="count >= 5"> Vous avez cliqué plus de 5 fois </div> -->
-
-<!-- <ul>
-  <li>{{person.firstname}}</li>
-  <li>{{person.lastname}}</li>
-  <li>{{person.age}}</li>
-</ul>
-<button @click.prevent="randomAge">changer age</button> -->
 </template>
 
 
 
-
+<style>
+  .barré{
+    text-decoration: line-through;
+  }
+</style>
 
 
 
