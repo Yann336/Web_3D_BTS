@@ -1,6 +1,36 @@
 <script setup>
 import { ref } from 'vue';
 
+
+const title =ref ("");
+const completed = ref(false);
+const date = ref();
+const mask = ref(false)
+
+const prints = (completed) =>{
+  if (completed == true){
+    return show = false
+  }
+}
+
+const todolist = ref([
+])
+
+const addTodo = () =>{
+   todolist.value.push({
+    title: title.value,
+    date: date.value,
+    completed : completed.value
+   })
+  title.value = ''
+  date.value = ''
+}
+
+const deleteTodo = (index) =>{
+  todolist.value.splice(index,1)
+}
+
+
 // const count = ref(0)
 // const movieName = ref('')
 // const movies = ref([
@@ -32,15 +62,18 @@ import { ref } from 'vue';
 //   count.value--
 // }
 
-const person = ref({
-  firstname : 'Yann',
-  lastname: 'Popov',
-  age: 20
-})
 
-const randomAge = () => {
-  person.value.age = Math.round(Math.random()* 100)
-}
+
+
+// const person = ref({
+//   firstname : 'Yann',
+//   lastname: 'Popov',
+//   age: 20
+// })
+
+// const randomAge = () => {
+//   person.value.age = Math.round(Math.random()* 100)
+// }
 
 
 </script>
@@ -49,6 +82,31 @@ const randomAge = () => {
 
 
 <template>
+
+<input type="checkbox" @click="prints(todo.completed)">
+
+<form action="" @submit.prevent="addTodo">
+  <input type="text" placeholder="Nom" v-model="title">
+  <br>
+  <input type="date" placeholder="date" v-model = "date">
+  <br>
+  <button> Ajouter </button>
+</form>
+
+
+
+<ul>
+  <li v-for="(todo, index) in todolist"
+  :key="index"  v-show="!show">
+  <input type="checkbox" v-model="todo.completed">
+  {{ todo.title }} {{ todo.date }} 
+
+  <button @click="deleteTodo(index)"> Supprimer </button>
+  </li>
+</ul>
+
+
+
   <!-- <p :id="'p-${count}'"> Coucou {{ count }}</p>
   <button @click="increment"> Incrementer </button>
   <button @click="decrement"> Decrementer </button>
@@ -71,12 +129,12 @@ const randomAge = () => {
 
   <div v-show="count >= 5"> Vous avez cliqué plus de 5 fois </div> -->
 
-<ul>
+<!-- <ul>
   <li>{{person.firstname}}</li>
   <li>{{person.lastname}}</li>
   <li>{{person.age}}</li>
 </ul>
-<button @click.prevent="randomAge">changer age</button>
+<button @click.prevent="randomAge">changer age</button> -->
 </template>
 
 
@@ -85,17 +143,3 @@ const randomAge = () => {
 
 
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
