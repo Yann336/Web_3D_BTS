@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 
 const title =ref ("");
@@ -26,16 +26,19 @@ const deleteTodo = (id) =>{
   todolist.value = todolist.value.filter(todo => todo.id !== id)
 };
 
-const sortedTodos = () =>{
+const sortedTodos = computed(() =>{
   let sortedTodos = todolist.value.toSorted((a,b)=> a.completed > b.completed ? 1 : -1)
   if (hide.value){
     sortedTodos = sortedTodos.filter(t => !t.completed );
   }
   return sortedTodos;
+})
+
+
+const remainingTodo = computed(() => {
+  return todolist.value.filter(t => t.completed === false).length
 }
-
-
-
+)
 
 </script>
 
@@ -57,7 +60,7 @@ const sortedTodos = () =>{
 <ul>
   <p v-if="todolist.length === 0"> Ajouter des taches</p>
 
-    <li v-for="todo in sortedTodos()"
+    <li v-for="todo in sortedTodos"
     :key="todo.id" 
     :class="{barré: todo.completed }" 
     >
@@ -77,6 +80,9 @@ const sortedTodos = () =>{
     <input type="checkbox" v-model="hide">
     Masquer les taches complétées
   </label>
+  <p v-if="remainingTodo > 0">
+    {{ remainingTodo }} tâche{{  remainingTodo > 1 ? 's' : '' }} à faire
+  </p>
 </div>
 
 
