@@ -22,7 +22,7 @@ module.exports = {
     'no-console': 'warn',
     'import/no-extraneous-dependencies': 'off',
     'vue/multi-word-component-names': 'off',
-    'linebreak-style': 'off',         // Windows CRLF
-    'import/no-unresolved': 'off',    // faux positifs Vite
+    'linebreak-style': 'off', // Windows CRLF
+    'import/no-unresolved': 'off', // faux positifs Vite
   },
 };
