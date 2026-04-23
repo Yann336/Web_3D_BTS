@@ -2,15 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const db = require('../config/db');
+const productsController = require('../controllers/productsController');
 
-router.get('/', async (req, res) => {
-  try {
-    const [rows] = await db.query('SELECT * FROM products');
-    res.json(rows);
-  } catch (error) {
-    res.status(500).json({ message: 'Erreur survenue', error });
-  }
-});
+router.get('/', productsController.getAllProducts);
 
 module.exports = router;
