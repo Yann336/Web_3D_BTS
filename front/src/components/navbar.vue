@@ -18,6 +18,12 @@ import '../assets/style/navbar.css';
         Se connecter
       </RouterLink>
       <RouterLink
+        to="/3d-printing"
+        class="nav"
+      >
+        Impression 3D
+      </RouterLink>
+      <RouterLink
         to="/basket"
         class="nav"
       >
