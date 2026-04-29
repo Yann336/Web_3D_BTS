@@ -10,6 +10,8 @@
 }
 
 .product-card{
+    text-decoration: none;
+    color: inherit;
     display: flex;
     flex-direction: column;
     padding: 20px;
