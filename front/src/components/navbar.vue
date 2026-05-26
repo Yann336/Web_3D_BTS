@@ -23,6 +23,12 @@ import '../assets/style/navbar.css';
       >
         Mon panier
       </RouterLink>
+      <RouterLink
+        to="/register"
+        class="nav"
+      >
+        Créer un compte
+      </RouterLink>
     </nav>
   </header>
 </template>
