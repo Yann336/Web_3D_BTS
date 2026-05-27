@@ -25,5 +25,5 @@
 </template>
 
 <style>
-@import '../assets/style/connection.css';
+@import '../assets/style/login.css';
 </style>

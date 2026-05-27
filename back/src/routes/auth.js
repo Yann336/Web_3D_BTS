@@ -8,8 +8,8 @@ const authController = require('../controllers/authController');
 router.post('/register', authController.register);
 
 // connection
-router.post('/login', (req, res) => {
-  res.send('marche 2');
-});
+router.post('/login', authController.login);
+
+router.post('/refresh', authController.refresh);
 
 module.exports = router;
